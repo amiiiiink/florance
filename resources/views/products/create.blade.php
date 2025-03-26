@@ -6,15 +6,6 @@
     <div class="container">
         <h2 class="mb-4">افزودن محصول جدید به انبار</h2>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <form action="{{ route('products.store') }}" method="POST">
             @csrf
@@ -43,7 +34,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">موجودی</label>
+                <label class="form-label">تعداد</label>
                 <input type="text" name="stock_quantity" class="form-control @error('stock_quantity') is-invalid @enderror" value="{{ old('stock_quantity') }}" >
                 @error('stock_quantity')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -52,7 +43,13 @@
 
             <div class="mb-3">
                 <label class="form-label">واحد خرید</label>
-                <input type="text" name="purchase_unit" class="form-control @error('purchase_unit') is-invalid @enderror" value="{{ old('purchase_unit') }}" >
+                <select name="purchase_unit" class="form-control @error('purchase_unit') is-invalid @enderror">
+                    <option>...</option>
+                    <option value="carton" {{ old('purchase_unit') == 'carton' ? 'selected' : '' }}>کارتن</option>
+                    <option value="package" {{ old('purchase_unit') == 'package' ? 'selected' : '' }}>بسته</option>
+                    <option value="single" {{ old('purchase_unit') == 'single' ? 'selected' : '' }}>دانه‌ای</option>
+                </select>
+
                 @error('purchase_unit')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Product;
@@ -23,8 +22,8 @@ class ProductController extends Controller
             'name' => 'required',
             'purchase_price' => 'required|numeric',
             'sale_price' => 'required|numeric',
-            'purchase_unit' => 'required',
-            'unit_per_purchase' => 'required|integer|min:1',
+            'purchase_unit' => 'required|in:carton,package,single',
+            'items_per_unit' => 'required|integer|min:1',
         ]);
 
         Product::create($request->all());
