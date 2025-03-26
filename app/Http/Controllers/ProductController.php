@@ -12,6 +12,10 @@ class ProductController extends Controller
         $products = Product::all();
         return view('products.index', compact('products'));
     }
+    public function create()
+    {
+        return view('products.create');
+    }
 
     public function store(Request $request)
     {
@@ -26,5 +30,30 @@ class ProductController extends Controller
         Product::create($request->all());
 
         return redirect()->route('products.index')->with('success', 'محصول اضافه شد.');
+    }
+    public function edit(Product $product)
+    {
+        return view('products.edit', compact('product'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'purchase_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
+            'stock_quantity' => 'required|integer',
+            'purchase_unit' => 'required|string',
+            'items_per_unit' => 'required|integer',
+        ]);
+
+        $product->update($request->all());
+        return redirect()->route('products.index')->with('success', 'محصول ویرایش شد.');
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'محصول حذف شد.');
     }
 }

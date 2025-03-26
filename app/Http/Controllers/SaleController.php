@@ -1,12 +1,19 @@
 <?php
-
 namespace App\Http\Controllers;
 
+
+use App\Models\Sale;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    public function create()
+    {
+        $products = Product::all();
+        return view('sales.create', compact('products'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -14,13 +21,16 @@ class SaleController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $product = Product::findOrFail($request->product_id);
+        $product = Product::find($request->product_id);
+        $total_price = $product->sale_price * $request->quantity;
 
-        try {
-            $sale = $product->sell($request->quantity);
-            return back()->with('success', 'فروش ثبت شد.');
-        } catch (\Exception $e) {
-            return back()->with('error', $e->getMessage());
-        }
+        Sale::create([
+            'product_id' => $product->id,
+            'quantity' => $request->quantity,
+            'total_price' => $total_price,
+            'sale_date' => now(),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'فروش با موفقیت ثبت شد.');
     }
 }

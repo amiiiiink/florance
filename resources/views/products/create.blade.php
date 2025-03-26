@@ -1,0 +1,72 @@
+@extends('layouts.app')
+
+@section('title', 'افزودن محصول جدید')
+
+@section('content')
+    <div class="container">
+        <h2 class="mb-4">افزودن محصول جدید به انبار</h2>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('products.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label">نام محصول</label>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" >
+                @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">قیمت خرید</label>
+                <input type="text" name="purchase_price" class="form-control @error('purchase_price') is-invalid @enderror" value="{{ old('purchase_price') }}" >
+                @error('purchase_price')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">قیمت فروش</label>
+                <input type="text" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" value="{{ old('sale_price') }}" >
+                @error('sale_price')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">موجودی</label>
+                <input type="text" name="stock_quantity" class="form-control @error('stock_quantity') is-invalid @enderror" value="{{ old('stock_quantity') }}" >
+                @error('stock_quantity')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">واحد خرید</label>
+                <input type="text" name="purchase_unit" class="form-control @error('purchase_unit') is-invalid @enderror" value="{{ old('purchase_unit') }}" >
+                @error('purchase_unit')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">تعداد در هر واحد</label>
+                <input type="text" name="items_per_unit" class="form-control @error('items_per_unit') is-invalid @enderror" value="{{ old('items_per_unit') }}" >
+                @error('items_per_unit')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button type="submit" class="btn btn-success">افزودن</button>
+        </form>
+    </div>
+@endsection
