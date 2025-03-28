@@ -19,7 +19,7 @@
 
             <div class="mb-3">
                 <label class="form-label">قیمت خرید</label>
-                <input type="text" name="purchase_price" class="form-control @error('purchase_price') is-invalid @enderror" value="{{ old('purchase_price') }}" >
+                <input type="text" name="purchase_price" class="form-control @error('purchase_price') is-invalid @enderror" value="{{ old('purchase_price') }}" placeholder="مثلا ۱۰۰۰ تومان" >
                 @error('purchase_price')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -27,7 +27,7 @@
 
             <div class="mb-3">
                 <label class="form-label">قیمت فروش</label>
-                <input type="text" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" value="{{ old('sale_price') }}" >
+                <input type="text" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" value="{{ old('sale_price') }}" placeholder="مثلا ۱۰۰۰ تومان">
                 @error('sale_price')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -46,6 +46,7 @@
                 <select name="purchase_unit" class="form-control @error('purchase_unit') is-invalid @enderror">
                     <option>...</option>
                     <option value="carton" {{ old('purchase_unit') == 'carton' ? 'selected' : '' }}>کارتن</option>
+                    <option value="box" {{ old('purchase_unit') == 'box' ? 'selected' : '' }}>باکس</option>
                     <option value="package" {{ old('purchase_unit') == 'package' ? 'selected' : '' }}>بسته</option>
                     <option value="single" {{ old('purchase_unit') == 'single' ? 'selected' : '' }}>دانه‌ای</option>
                 </select>
@@ -66,4 +67,22 @@
             <button type="submit" class="btn btn-success">افزودن</button>
         </form>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function formatNumberInput(input) {
+                input.addEventListener("input", function () {
+                    let value = input.value.replace(/,/g, ''); // حذف کاماهای قبلی
+                    if (!isNaN(value) && value !== "") {
+                        input.value = Number(value).toLocaleString('en-US');
+                    }
+                });
+            }
+
+            formatNumberInput(document.querySelector('input[name="purchase_price"]'));
+            formatNumberInput(document.querySelector('input[name="sale_price"]'));
+        });
+    </script>
+
 @endsection

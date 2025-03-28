@@ -20,13 +20,16 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'purchase_price' => 'required|numeric',
-            'sale_price' => 'required|numeric',
-            'purchase_unit' => 'required|in:carton,package,single',
+            'purchase_price' => 'required|string',
+            'sale_price' => 'required|string',
+            'purchase_unit' => 'required|in:carton,box,package,single',
             'items_per_unit' => 'required|integer|min:1',
         ]);
+        $data = $request->all();
+        $data['purchase_price'] = str_replace(',', '', $data['purchase_price']);
+        $data['sale_price'] = str_replace(',', '', $data['sale_price']);
 
-        Product::create($request->all());
+        Product::create($data);
 
         return redirect()->route('products.index')->with('success', 'محصول اضافه شد.');
     }

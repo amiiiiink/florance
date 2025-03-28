@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('purchase_price'); // قیمت خرید
             $table->integer('sale_price'); // قیمت فروش واحد کوچک
             $table->integer('stock_quantity')->default(0); // موجودی به صورت دانه‌ای
-            $table->enum('purchase_unit', ['carton', 'package', 'single']); // واحد خرید
+            $table->enum('purchase_unit', ['carton', 'package', 'single','box']); // واحد خرید
             $table->integer('unit_per_purchase')->default(1); // تعداد دانه در هر واحد خرید
             $table->timestamps();
         });
