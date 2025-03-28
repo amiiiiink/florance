@@ -17,20 +17,48 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
+            'product_id' => 'required|array',
+            'product_id.*' => 'exists:products,id',
+            'quantity' => 'required|array',
+            'quantity.*' => 'integer|min:1',
+            'price' => 'required|array',
+            'price.*' => 'numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
         ]);
 
-        $product = Product::find($request->product_id);
-        $total_price = $product->sale_price * $request->quantity;
+        $totalPrice = 0;
 
-        Sale::create([
-            'product_id' => $product->id,
-            'quantity' => $request->quantity,
-            'total_price' => $total_price,
-            'sale_date' => now(),
+        // ایجاد فاکتور جدید
+        $invoice = Invoice::create([
+            'total_price' => 0,
+            'discount' => $request->discount ?? 0,
+            'final_price' => 0,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'فروش با موفقیت ثبت شد.');
+        // ذخیره محصولات فاکتور
+        foreach ($request->product_id as $index => $productId) {
+            $productTotal = $request->price[$index] * $request->quantity[$index];
+            $totalPrice += $productTotal;
+
+            Sale::create([
+                'invoice_id' => $invoice->id,
+                'product_id' => $productId,
+                'quantity' => $request->quantity[$index],
+                'total_price' => $productTotal,
+            ]);
+        }
+
+        // بروزرسانی فاکتور با مبلغ نهایی
+        $invoice->update([
+            'total_price' => $totalPrice,
+            'final_price' => max($totalPrice - $invoice->discount, 0),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'فاکتور با موفقیت ثبت شد.');
     }
+
+
+
+
+
 }

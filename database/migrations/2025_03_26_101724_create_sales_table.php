@@ -6,16 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('invoice_id')->constrained()->onDelete('cascade'); // ارتباط با فاکتور
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity'); // تعداد فروخته‌شده به دانه‌ای
-            $table->integer('total_price'); // قیمت کل فروش
+            $table->integer('quantity');
+            $table->decimal('total_price', 15, 2);
             $table->timestamps();
         });
     }
