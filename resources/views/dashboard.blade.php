@@ -3,12 +3,12 @@
 @section('content')
     <div class="container">
         <h2>داشبورد فروش روزانه </h2>
-        <div style="text-align: center; margin-bottom:7px;padding: 10px; background-color: rgba(28,57,173,0.6);color: #ffffff">
+        <div style="text-align: center; margin-bottom:7px;padding: 10px; background-color: rgba(31, 157, 110, 0.6);color: #ffffff">
             <!-- Shamsi Date using Verta -->
-            <p>Current Date: {{ \Verta::now()->format('%d %B %Y') }}</p>
+            <p>{{ \Verta::now()->format('%d %B %Y') }}</p>
 
             <!-- Real-time Shamsi Time using JavaScript -->
-            <p>Current Time: <span id="time">{{ \Verta::now()->format('H:i:s') }}</span></p>
+            <p> <span id="time">{{ \Verta::now()->format('H:i:s') }}</span></p>
         </div>
         <div class="row">
             <div class="col-md-6">
