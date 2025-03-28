@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_price', 15, 2); // مبلغ کل
-            $table->decimal('discount', 15, 2)->default(0); // تخفیف
-            $table->decimal('final_price', 15, 2); // قیمت نهایی پس از تخفیف
+            $table->decimal('total_price', 15, 2)->default(0);
+            $table->decimal('discount', 15, 2)->default(0);
+            $table->decimal('final_price', 15, 2)->default(0); // مقدار پیش‌فرض ۰
             $table->timestamps();
         });
+
     }
+
 
 
     /**

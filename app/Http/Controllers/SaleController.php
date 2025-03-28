@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Invoice;
 use App\Models\Sale;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -34,6 +35,8 @@ class SaleController extends Controller
             'discount' => $request->discount ?? 0,
             'final_price' => 0,
         ]);
+
+
 
         // ذخیره محصولات فاکتور
         foreach ($request->product_id as $index => $productId) {
