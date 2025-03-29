@@ -4,8 +4,11 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-4">افزودن محصول جدید به انبار</h2>
 
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>افزودن محصول جدید به انبار</h2>
+                <a href="{{ route('products.index') }}" class="btn btn-primary">لیست محصولات</a>
+            </div>
 
         <form action="{{ route('products.store') }}" method="POST">
             @csrf
