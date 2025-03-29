@@ -10,6 +10,15 @@
         body {
             font-family: Vazirmatn, sans-serif;
         }
+        /* For mobile devices (below 768px) */
+        @media (max-width: 768px) {
+            .product-select {
+                width: 100% !important; /* Make the select take up the full width on mobile */
+            }
+        }
+
+
+
     </style>
 </head>
 <body dir="rtl">
