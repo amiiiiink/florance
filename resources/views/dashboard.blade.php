@@ -17,7 +17,7 @@
                     <p>تعداد کل محصولات فروخته‌شده: {{ number_format($totalQuantity) }} عدد</p>
                     <p>مجموع تخفیف‌های اعمال‌شده: {{ number_format($totalDiscount) }} تومان</p>
                     <p>فروش نهایی پس از تخفیف: {{ number_format($finalRevenue) }} تومان</p>
-                    <p>سود خالص روزانه پس از تخفیف: :... تومان</p>
+                    <p>سود خالص روزانه : :... تومان</p>
                 </div>
             </div>
 
