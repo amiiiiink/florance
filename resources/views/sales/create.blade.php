@@ -33,7 +33,7 @@
                             </select>
                         </td>
                         <td><input type="number" name="quantity[]" class="form-control quantity" min="1" value="1"></td>
-                        <td><input type="text" name="price[]" class="form-control price" readonly></td>
+                        <td><input type="text" name="price[]" class="form-control price" ></td>
                         <td>
                             <button type="button" class="btn btn-danger remove-row">حذف</button>
                         </td>
@@ -166,7 +166,7 @@
                 </select>
             </td>
             <td><input type="number" name="quantity[]" class="form-control quantity" min="1" value="1"></td>
-            <td><input type="text" name="price[]" class="form-control price" readonly></td>
+            <td><input type="text" name="price[]" class="form-control price" ></td>
             <td><button type="button" class="btn btn-danger remove-row">حذف</button></td>
         </tr>
 `;
