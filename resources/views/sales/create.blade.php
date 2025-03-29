@@ -22,7 +22,7 @@
                     </thead>
                     <tbody id="product-rows">
                     <tr>
-                        <td>
+                        <td style="width: 60%;padding: 10px;">
                             <select name="product_id[]" class="form-control product-select">
                                 <option value="">انتخاب محصول...</option>
                                 @foreach ($products as $product)
