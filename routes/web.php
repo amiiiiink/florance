@@ -16,4 +16,5 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
 Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
 Route::resource('expenses', ExpenseController::class);
+Route::get('game', [DashboardController::class,'game']);
 

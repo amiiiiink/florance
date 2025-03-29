@@ -40,7 +40,10 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('salesToday', 'totalQuantity', 'totalRevenue','invoices', 'totalDiscount', 'finalRevenue', 'bestSellingProduct'));
     }
-
+    public function game()
+    {
+        return view('game');
+    }
 
 
 
