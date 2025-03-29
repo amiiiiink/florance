@@ -21,7 +21,20 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->purchase_price }}</td>
                     <td>{{ $product->sale_price }}</td>
-                    <td>{{ $product->stock_quantity }}</td>
+                    <td>
+                        @if ($product->unit == 'carton')
+                            کارتُن
+                        @elseif ($product->unit == 'package')
+                            بسته
+                        @elseif ($product->unit == 'single')
+                            تک
+                        @elseif ($product->unit == 'box')
+                            جعبه
+                        @else
+                            {{ $product->unit }} <!-- Default fallback if the unit doesn't match any of the above -->
+                        @endif
+                    </td>
+
                     <td>{{ $product->purchase_unit }}</td>
                     <td>
                         <form method="POST" action="{{ route('sales.store') }}">
