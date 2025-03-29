@@ -23,13 +23,13 @@
                     <td>{{ $product->sale_price }}</td>
                     <td>
                         @if ($product->unit == 'carton')
-                            کارتُن
+                            {{ 'کارتُن' }}
                         @elseif ($product->unit == 'package')
-                            بسته
+                            {{ 'بسته' }}
                         @elseif ($product->unit == 'single')
-                            تک
+                            {{ 'تک' }}
                         @elseif ($product->unit == 'box')
-                            جعبه
+                            {{ 'جعبه' }}
                         @else
                             {{ $product->unit }} <!-- Default fallback if the unit doesn't match any of the above -->
                         @endif
