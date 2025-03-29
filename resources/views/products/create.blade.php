@@ -5,21 +5,21 @@
 @section('content')
     <div class="container">
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>افزودن محصول جدید به انبار</h2>
-                <a href="{{ route('products.index') }}" class="btn btn-primary">لیست محصولات</a>
-            </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>افزودن محصول جدید به انبار</h2>
+            <a href="{{ route('products.index') }}" class="btn btn-primary">لیست محصولات</a>
+        </div>
 
         <form action="{{ route('products.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label class="form-label">نام محصول</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" >
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                       value="{{ old('name') }}">
                 @error('name')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-
 
 
             <div class="mb-3">
@@ -39,17 +39,20 @@
 
             <div class="mb-3">
                 <label class="form-label">تعداد</label>
-                <input type="text" name="stock_quantity" class="form-control @error('stock_quantity') is-invalid @enderror" value="{{ old('stock_quantity') }}" >
+                <input type="text" name="stock_quantity"
+                       class="form-control @error('stock_quantity') is-invalid @enderror"
+                       value="{{ old('stock_quantity') }}">
                 @error('stock_quantity')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
 
-
             <div class="mb-3">
                 <label class="form-label">تعداد در هر واحد</label>
-                <input type="text" name="items_per_unit" class="form-control @error('items_per_unit') is-invalid @enderror" value="{{ old('items_per_unit') }}" >
+                <input type="text" name="items_per_unit"
+                       class="form-control @error('items_per_unit') is-invalid @enderror"
+                       value="{{ old('items_per_unit') }}">
                 @error('items_per_unit')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -57,7 +60,9 @@
 
             <div class="mb-3">
                 <label class="form-label">قیمت خرید</label>
-                <input type="text" name="purchase_price" class="form-control @error('purchase_price') is-invalid @enderror" value="{{ old('purchase_price') }}" placeholder="مثلا ۱۰۰۰ تومان" >
+                <input type="text" name="purchase_price"
+                       class="form-control @error('purchase_price') is-invalid @enderror"
+                       value="{{ old('purchase_price') }}" placeholder="مثلا ۱۰۰۰ تومان">
                 @error('purchase_price')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -65,7 +70,8 @@
 
             <div class="mb-3">
                 <label class="form-label"> قیمت فروش هر واحد</label>
-                <input type="text" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" value="{{ old('sale_price') }}" placeholder="مثلا ۱۰۰۰ تومان">
+                <input type="text" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror"
+                       value="{{ old('sale_price') }}" placeholder="مثلا ۱۰۰۰ تومان">
                 @error('sale_price')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
