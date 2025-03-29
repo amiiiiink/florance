@@ -16,6 +16,7 @@
                     <tr>
                         <th>محصول</th>
                         <th>تعداد</th>
+                        <th>قیمت</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             </select>
                         </td>
                         <td><input type="number" name="quantity[]" class="form-control quantity" min="1" value="1"></td>
+                        <td><input type="text" name="price[]" class="form-control price" readonly></td>
                         <td>
                             <button type="button" class="btn btn-danger remove-row">حذف</button>
                         </td>
@@ -42,13 +44,14 @@
 
             <button type="button" id="add-row" class="btn btn-success">افزودن محصول جدید</button>
 
-            <div id="dynamic-table" class="mt-4">
+            <div id="dynamic-table" class="mt-4" style="display: none;">
                 <h4>محصولات انتخاب شده</h4>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>نام محصول</th>
                         <th>تعداد</th>
+                        <th>قیمت</th>
                         <th>قیمت × تعداد</th>
                     </tr>
                     </thead>
@@ -108,6 +111,7 @@
                         <tr>
                             <td>${productName}</td>
                             <td>${quantity}</td>
+                            <td>${price.toLocaleString()} تومان</td>
                             <td>${(rowTotal).toLocaleString()} تومان</td>
                         </tr>
                     `;
@@ -115,6 +119,11 @@
 
                 // Update the dynamic table
                 $('#dynamic-rows').html(dynamicRows);
+
+                // If there are products, show the result table
+                if ($('#product-rows tr').length > 0) {
+                    $('#dynamic-table').show();
+                }
 
                 // Calculate final price
                 let discount = parseFloat($('#discount').val()) || 0;
@@ -131,6 +140,9 @@
 
             // Update price field and recalculate totals when selecting a product
             $(document).on('change', '.product-select', function () {
+                let price = $(this).find(':selected').data('price') || 0;
+                let row = $(this).closest('tr');
+                row.find('.price').val(price);
                 calculateTotals();
             });
 
@@ -154,6 +166,7 @@
                 </select>
             </td>
             <td><input type="number" name="quantity[]" class="form-control quantity" min="1" value="1"></td>
+            <td><input type="text" name="price[]" class="form-control price" readonly></td>
             <td><button type="button" class="btn btn-danger remove-row">حذف</button></td>
         </tr>
 `;
