@@ -30,13 +30,7 @@
                     <input type="file" name="file" class="form-control">
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">وضعیت</label>
-                    <select name="status" class="form-select">
-                        <option value="new">ثبت نشده</option>
-                        <option value="paid">ثبت شده</option>
-                    </select>
-                </div>
+
 
                 <button type="submit" class="btn btn-success">ثبت فاکتور</button>
                 <a href="{{ route('purchase_invoices.index') }}" class="btn btn-secondary">بازگشت</a>
