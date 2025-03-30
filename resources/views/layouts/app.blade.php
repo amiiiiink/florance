@@ -16,9 +16,6 @@
                 width: 100% !important; /* Make the select take up the full width on mobile */
             }
         }
-
-
-
     </style>
 </head>
 <body dir="rtl">
@@ -34,7 +31,10 @@
                     <a class="nav-link" href="{{ route('dashboard') }}">داشبورد</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('products.create') }}">ثبت خرید</a>
+                    <a class="nav-link" href="{{ route('purchase_invoices.create') }}">آپلود فاکتور های خرید</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('products.create') }}">ثبت  خرید</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('sales.create') }}">ثبت فروش</a>
