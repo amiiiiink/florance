@@ -14,7 +14,7 @@
             <div id="product-container">
                 <div class="product-box p-3 mb-3 border rounded">
                     <label>محصول</label>
-                    <select name="product_id[]" class="form-control product-select">
+                    <select name="product_id[]" class="form-control product-select" id="product-select">
                         <option value="">انتخاب محصول...</option>
                         @foreach ($products as $product)
                             <option value="{{ $product->id }}" data-price="{{ $product->sale_price }}">
@@ -53,8 +53,14 @@
 @endsection
 
 @section('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
+            $('#product-select').select2({
+                placeholder: "محصول موردنظر را جستجو کنید...",
+                allowClear: true
+            });
             function calculateTotals() {
                 let totalQuantity = 0;
                 let totalPrice = 0;
