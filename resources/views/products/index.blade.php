@@ -17,7 +17,7 @@
             <tbody>
             @foreach($products as $product)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ toPersianNumbers(($products->currentPage() - 1) * $products->perPage() + $loop->iteration) }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ toPersianNumbers(number_format($product->purchase_price)) }}</td>
                     <td>{{ toPersianNumbers(number_format($product->sale_price)) }}</td>
@@ -31,14 +31,17 @@
                         @elseif ($product->purchase_unit == 'box')
                             {{ 'جعبه' }}
                         @else
-                            {{ $product->purchase_unit }} <!-- Default fallback if the unit doesn't match any of the above -->
+                            {{ $product->purchase_unit }}
                         @endif
                     </td>
-
-
                 </tr>
             @endforeach
             </tbody>
         </table>
+
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-center">
+            {{ $products->links('vendor.pagination.bootstrap-4') }}
+        </div>
     </div>
 @endsection
