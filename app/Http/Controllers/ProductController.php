@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::query()->latest()->paginate(20);
+        $query = Product::query();
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $products = $query->paginate(20);
+
         return view('products.index', compact('products'));
     }
+
     public function create()
     {
         return view('products.create');

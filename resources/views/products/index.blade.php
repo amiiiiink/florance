@@ -4,6 +4,15 @@
     <div class="container">
         <h2 class="mb-4">مدیریت محصولات</h2>
 
+        <!-- Search Form -->
+        <form method="GET" action="{{ route('products.index') }}" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="جستجوی محصول..."
+                       value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">جستجو</button>
+            </div>
+        </form>
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -41,7 +50,7 @@
 
         <!-- Pagination Links -->
         <div class="d-flex justify-content-center">
-            {{ $products->links('vendor.pagination.bootstrap-4') }}
+            {{ $products->appends(['search' => request('search')])->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
 @endsection
