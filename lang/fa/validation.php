@@ -185,6 +185,7 @@ return [
         "sale_price" => "قیمت فروش",
         "purchase_unit" => "واحد خرید",
         "items_per_unit" => "تعداد در هر واحد",
+        "stock_quantity" => "تعداد",
 
     ],
 

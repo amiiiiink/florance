@@ -37,6 +37,7 @@ class ProductController extends Controller
             'purchase_price' => 'required|string',
             'sale_price' => 'required|string',
             'purchase_unit' => 'required|in:carton,box,package,single',
+            'stock_quantity' => 'required|string',
             'items_per_unit' => 'required|integer|min:1',
         ]);
         $data = $request->all();
