@@ -14,7 +14,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $products = $query->paginate(20);
+        $products = $query->latest()->paginate(20);
 
         return view('products.index', compact('products'));
     }

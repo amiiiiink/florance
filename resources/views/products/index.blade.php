@@ -18,9 +18,12 @@
             <tr>
                 <th>ردیف</th>
                 <th>نام محصول</th>
+                <th>واحد خرید</th>
+                <th>تعداد</th>
+                <th>تعداد در هر واحد</th>
                 <th>قیمت خرید(تومان)</th>
                 <th>قیمت فروش(تومان)</th>
-                <th>واحد خرید</th>
+
             </tr>
             </thead>
             <tbody>
@@ -28,8 +31,6 @@
                 <tr>
                     <td>{{ toPersianNumbers(($products->currentPage() - 1) * $products->perPage() + $loop->iteration) }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ toPersianNumbers(number_format($product->purchase_price)) }}</td>
-                    <td>{{ toPersianNumbers(number_format($product->sale_price)) }}</td>
                     <td>
                         @if ($product->purchase_unit == 'carton')
                             {{ 'کارتُن' }}
@@ -43,6 +44,12 @@
                             {{ $product->purchase_unit }}
                         @endif
                     </td>
+                    <td>{{ toPersianNumbers($product->stock_quantity) }}</td>
+                    <td>{{ toPersianNumbers($product->unit_per_purchase) }}</td>
+
+                    <td>{{ toPersianNumbers(number_format($product->purchase_price)) }}</td>
+                    <td>{{ toPersianNumbers(number_format($product->sale_price)) }}</td>
+
                 </tr>
             @endforeach
             </tbody>
