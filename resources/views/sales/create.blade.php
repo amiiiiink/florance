@@ -57,10 +57,12 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#product-select').select2({
+            // Initialize Select2 for the first select element
+            $('.product-select').select2({
                 placeholder: "محصول موردنظر را جستجو کنید...",
                 allowClear: true
             });
+
             function calculateTotals() {
                 let totalQuantity = 0;
                 let totalPrice = 0;
@@ -92,15 +94,15 @@
 
             $('#add-row').click(function () {
                 let newRow = `
-                    <div class="product-box p-3 mb-3 border rounded">
-                        <label>محصول</label>
-                        <select name="product_id[]" class="form-control product-select">
-                            <option value="">انتخاب محصول...</option>
-                            @foreach ($products as $product)
+            <div class="product-box p-3 mb-3 border rounded">
+                <label>محصول</label>
+                <select name="product_id[]" class="form-control product-select">
+                    <option value="">انتخاب محصول...</option>
+                    @foreach ($products as $product)
                 <option value="{{ $product->id }}" data-price="{{ $product->sale_price }}">
-                                {{ $product->name }} ({{ $product->sale_price }} تومان)
-                            </option>
-                            @endforeach
+                            {{ $product->name }} ({{ $product->sale_price }} تومان)
+                        </option>
+                    @endforeach
                 </select>
 
                 <label class="mt-2">تعداد</label>
@@ -111,8 +113,16 @@
 
                 <button type="button" class="btn btn-danger btn-sm mt-2 remove-row">حذف</button>
             </div>
-`;
+        `;
+
+                // Append the new row
                 $('#product-container').append(newRow);
+
+                // Reinitialize Select2 for the newly added row
+                $('.product-select').last().select2({
+                    placeholder: "محصول موردنظر را جستجو کنید...",
+                    allowClear: true
+                });
             });
 
             $(document).on('click', '.remove-row', function () {
@@ -124,5 +134,6 @@
                 calculateTotals();
             });
         });
+
     </script>
 @endsection
