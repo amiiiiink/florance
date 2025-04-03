@@ -37,7 +37,7 @@
                         @elseif ($product->purchase_unit == 'package')
                             {{ 'بسته' }}
                         @elseif ($product->purchase_unit == 'single')
-                            {{ 'تک' }}
+                            {{ ' دانه ای' }}
                         @elseif ($product->purchase_unit == 'box')
                             {{ 'جعبه' }}
                         @else
