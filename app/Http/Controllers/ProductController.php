@@ -26,6 +26,12 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge([
+            'purchase_price' => convertPersianToEnglish($request->purchase_price),
+            'sale_price' => convertPersianToEnglish($request->sale_price),
+            'items_per_unit' => convertPersianToEnglish($request->items_per_unit),
+            'stock_quantity' => convertPersianToEnglish($request->stock_quantity),
+        ]);
         $request->validate([
             'name' => 'required',
             'purchase_price' => 'required|string',
