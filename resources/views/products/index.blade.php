@@ -7,18 +7,20 @@
         <table class="table table-bordered">
             <thead>
             <tr>
+                <th>ردیف</th>
                 <th>نام محصول</th>
-                <th>قیمت خرید</th>
-                <th>قیمت فروش</th>
+                <th>قیمت خرید(تومان)</th>
+                <th>قیمت فروش(تومان)</th>
                 <th>واحد خرید</th>
             </tr>
             </thead>
             <tbody>
             @foreach($products as $product)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->purchase_price }}</td>
-                    <td>{{ $product->sale_price }}</td>
+                    <td>{{ toPersianNumbers(number_format($product->purchase_price)) }}</td>
+                    <td>{{ toPersianNumbers(number_format($product->sale_price)) }}</td>
                     <td>
                         @if ($product->purchase_unit == 'carton')
                             {{ 'کارتُن' }}
