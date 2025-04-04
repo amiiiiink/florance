@@ -9,7 +9,7 @@
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="جستجوی محصول..."
                        value="{{ request('search') }}">
-                <button type="submit" class="btn btn-primary">جستجو</button>
+                <button type="submit" class="btn btn-primary" style="border-radius: 12px;">جستجو</button>
             </div>
         </form>
 
