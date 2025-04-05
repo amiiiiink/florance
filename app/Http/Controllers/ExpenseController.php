@@ -60,4 +60,34 @@ class ExpenseController extends Controller
 
         return redirect()->route('expenses.index')->with('success', 'هزینه با موفقیت حذف شد.');
     }
+    public function updateStatusAndFile(Request $request)
+    {
+
+        $request->validate([
+            'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'description' => 'nullable|string',
+            'expense_id' => 'required|exists:expenses,id'
+        ]);
+
+        $expense = Expense::query()->findOrFail($request->expense_id);
+
+        // Store file if provided
+        $filePath = null;
+        if ($request->hasFile('file')) {
+            $filePath = $request->file('file')->store('expenses', 'public');
+        }
+
+        // Append new description to the existing description
+        if ($request->filled('description')) {
+            $expense->description .= "\n" . $request->description; // Appending new description with a newline (optional)
+        }
+
+        // Update the expense record
+        $expense->file_path = $filePath;
+        $expense->status = 'payed';
+//        $expense->description = $request->description;
+        $expense->save();
+
+        return redirect()->route('expenses.index')->with('success', 'هزینه با موفقیت به روز رسانی شد.');
+    }
 }

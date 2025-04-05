@@ -10,7 +10,8 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label">نام هزینه</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" >
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                       value="{{ old('name') }}">
                 @error('name')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -31,17 +32,23 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">توضیحات</label>
-                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror"
+                          id="description"
+                          name="description"
+                          rows="3">
+        {{ old('description', 'توضیحات اولیه :') }}
+    </textarea>
 
                 @error('description')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-
             </div>
+
 
             <div class="mb-3">
                 <label class="form-label">مبلغ</label>
-                <input type="text" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}">
+                <input type="text" name="amount" class="form-control @error('amount') is-invalid @enderror"
+                       value="{{ old('amount') }}">
                 @error('amount')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -49,7 +56,8 @@
 
             <div class="mb-3">
                 <label class="form-label">تاریخ</label>
-                <input type="text" id="date-picker" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required>
+                <input type="text" id="date-picker" name="date" class="form-control @error('date') is-invalid @enderror"
+                       value="{{ old('date') }}" required>
                 @error('date')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -70,7 +78,7 @@
     <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#date-picker").persianDatepicker({
                 format: "YYYY-MM-DD",
                 autoClose: true,
