@@ -5,18 +5,17 @@
         <h2>داشبورد فروش روزانه </h2>
         <div style="text-align: center; margin-bottom:7px;padding: 10px; background-color: rgba(31, 157, 110, 0.6);color: #ffffff">
             <!-- Shamsi Date using Verta -->
-            <p>{{ \Verta::now()->format('%d %B %Y') }}</p>
-
+            <p>{{ toPersianNumbers(\Verta::now()->format('%d %B %Y')) }}</p>
             <!-- Real-time Shamsi Time using JavaScript -->
             <p> <span id="time">{{ \Verta::now()->format('H:i:s') }}</span></p>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="card p-3">
-                    <h4>مجموع فروش امروز: {{ number_format($totalRevenue) }} تومان</h4>
-                    <p>تعداد کل محصولات فروخته‌شده: {{ number_format($totalQuantity) }} عدد</p>
-                    <p>مجموع تخفیف‌های اعمال‌شده: {{ number_format($totalDiscount) }} تومان</p>
-                    <p>فروش نهایی پس از تخفیف: {{ number_format($finalRevenue) }} تومان</p>
+                    <h4>مجموع فروش امروز: {{ toPersianNumbers(number_format($totalRevenue)) }} تومان</h4>
+                    <p>تعداد کل محصولات فروخته‌شده: {{ toPersianNumbers(number_format($totalQuantity)) }} عدد</p>
+                    <p>مجموع تخفیف‌های اعمال‌شده: {{ toPersianNumbers(number_format($totalDiscount)) }} تومان</p>
+                    <p>فروش نهایی پس از تخفیف: {{ toPersianNumbers(number_format($finalRevenue)) }} تومان</p>
                     <p>سود خالص روزانه : :... تومان</p>
                 </div>
             </div>
@@ -24,7 +23,7 @@
             @if ($bestSellingProduct)
                 <div class="col-md-6">
                     <div class="card p-3">
-                        <h4>پرفروش‌ترین محصول: {{ $bestSellingProduct->product->name }} ({{ $bestSellingProduct->total_quantity }} عدد)</h4>
+                        <h4>پرفروش‌ترین محصول: {{ $bestSellingProduct->product->name }} ({{ toPersianNumbers($bestSellingProduct->total_quantity) }} عدد)</h4>
                     </div>
                 </div>
             @endif
@@ -38,23 +37,23 @@
                 <div class="col-md-12">
                     <div class="card mb-3">
                         <div class="card-header bg-primary text-white">
-                            <strong>فاکتور #{{ $invoice->id }}</strong> -
+                            <strong>فاکتور #{{ toPersianNumbers($invoice->id) }}</strong> -
                             تاریخ:
-                            {{ \Verta::instance($invoice->created_at)->format('Y/m/d H:i') }}
+                            {{ toPersianNumbers(\Verta::instance($invoice->created_at)->format('Y/m/d H:i')) }}
                         </div>
                         <div class="card-body">
                             <ul class="list-group">
                                 @foreach ($invoice->sales as $sale)
                                     <li class="list-group-item d-flex justify-content-between">
-                                        <span>{{ $sale->product->name }} - تعداد: {{ $sale->quantity }}</span>
-                                        <span>{{ number_format($sale->total_price) }} تومان</span>
+                                        <span>{{ $sale->product->name }} - تعداد: {{ toPersianNumbers($sale->quantity) }}</span>
+                                        <span>{{ toPersianNumbers(number_format($sale->total_price)) }} تومان</span>
                                     </li>
                                 @endforeach
                             </ul>
                             <hr>
-                            <p>جمع کل: <strong>{{ number_format($invoice->total_price) }} تومان</strong></p>
-                            <p>تخفیف: <strong>{{ number_format($invoice->discount) }} تومان</strong></p>
-                            <p>قیمت نهایی: <strong>{{ number_format($invoice->final_price) }} تومان</strong></p>
+                            <p>جمع کل: <strong>{{ toPersianNumbers(number_format($invoice->total_price)) }} تومان</strong></p>
+                            <p>تخفیف: <strong>{{ toPersianNumbers(number_format($invoice->discount)) }} تومان</strong></p>
+                            <p>قیمت نهایی: <strong>{{ toPersianNumbers(number_format($invoice->final_price)) }} تومان</strong></p>
                         </div>
                     </div>
                 </div>
