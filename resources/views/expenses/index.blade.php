@@ -27,6 +27,7 @@
                 <th>مبلغ</th>
                 <th>تاریخ</th>
                 <th>وضعیت</th>
+                <th>فیش واریز</th>
                 <th>اقدامات</th>
             </tr>
             </thead>
@@ -50,6 +51,13 @@
                             <span class="badge bg-primary">جدید</span>
                         @elseif($expense->status == "payed")
                             <span class="badge bg-success">پرداخت شده</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($expense->file_path)
+                            <a href="{{ Storage::url($expense->file_path) }}" class="btn btn-sm btn-success" target="_blank">دانلود</a>
+                        @else
+                            <span class="text-muted">ندارد</span>
                         @endif
                     </td>
                     <td>
@@ -92,7 +100,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">توضیحات</label>
-                            <textarea class="form-control" id="description" name="description"></textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror"
+                                      id="description"
+                                      name="description"
+                                      rows="3">
+        {{ old('description', 'توضیحات پرداخت :') }}
+    </textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
