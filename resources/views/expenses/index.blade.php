@@ -17,71 +17,74 @@
 
         <a href="{{ route('expenses.create') }}" class="btn btn-success mb-3">افزودن هزینه جدید</a>
 
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>ردیف</th>
-                <th>نام هزینه</th>
-                <th>نوع بدهی</th>
-                <th>توضیحات</th>
-                <th>مبلغ</th>
-                <th>تاریخ</th>
-                <th>وضعیت</th>
-                <th>اقدامات</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($expenses as $expense)
+        <!-- Make the table responsive by wrapping it inside a div with the class 'table-responsive' -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td>{{ toPersianNumbers($loop->iteration) }}</td>
-                    <td>{{ $expense->name }}</td>
-                    <td>
-                        @if($expense->type == "cash")
-                            {{ 'نقدی' }}
-                        @elseif($expense->type == "check")
-                            {{ 'چک' }}
-                        @endif
-                    </td>
-                    <td>{{ $expense->description }}</td>
-                    <td>{{ toPersianNumbers(number_format($expense->amount)) }} تومان</td>
-                    <td>{{ toPersianNumbers(\Verta::instance($expense->date)->format('Y/m/d')) }}</td>
-                    <td>
-                        @if($expense->status == "new")
-                            <span class="badge bg-primary">جدید</span>
-                        @elseif($expense->status == "payed")
-                            <span class="badge bg-success">پرداخت شده</span>
-                        @endif
-                    </td>
-
-                    <td>
-                        @if($expense->status == "new")
-                            <div class="d-flex gap-2">
-                                <!-- Upload File Button -->
-                                <button class="btn btn-warning btn-sm" style="font-size: 9px; color: #fff" data-bs-toggle="modal" data-bs-target="#uploadFileModal" data-expense-id="{{ $expense->id }}" data-expense-name="{{ $expense->name }}">
-                                    آپلود رسید
-                                </button>
-
-                                <!-- Delete Form Button -->
-                                <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="delete-form" data-name="{{ $expense->name }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px; padding: 3px 6px;">
-                                        حذف
-                                    </button>
-                                </form>
-                            </div>
-
-                        @endif
-                        @if($expense->file_path)
-                            <a href="{{ Storage::url($expense->file_path) }}" class="btn btn-sm btn-info" target="_blank">دانلود</a>
-                        @endif
-
-                    </td>
-
+                    <th>ردیف</th>
+                    <th>نام هزینه</th>
+                    <th>نوع بدهی</th>
+                    <th>توضیحات</th>
+                    <th>مبلغ</th>
+                    <th>تاریخ</th>
+                    <th>وضعیت</th>
+                    <th>اقدامات</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($expenses as $expense)
+                    <tr>
+                        <td>{{ toPersianNumbers($loop->iteration) }}</td>
+                        <td>{{ $expense->name }}</td>
+                        <td>
+                            @if($expense->type == "cash")
+                                {{ 'نقدی' }}
+                            @elseif($expense->type == "check")
+                                {{ 'چک' }}
+                            @endif
+                        </td>
+                        <td>{{ $expense->description }}</td>
+                        <td>{{ toPersianNumbers(number_format($expense->amount)) }} تومان</td>
+                        <td>{{ toPersianNumbers(\Verta::instance($expense->date)->format('Y/m/d')) }}</td>
+                        <td>
+                            @if($expense->status == "new")
+                                <span class="badge bg-primary">جدید</span>
+                            @elseif($expense->status == "payed")
+                                <span class="badge bg-success">پرداخت شده</span>
+                            @endif
+                        </td>
+
+                        <td>
+                            @if($expense->status == "new")
+                                <div class="d-flex gap-2">
+                                    <!-- Upload File Button -->
+                                    <button class="btn btn-warning btn-sm" style="font-size: 9px; color: #fff" data-bs-toggle="modal" data-bs-target="#uploadFileModal" data-expense-id="{{ $expense->id }}" data-expense-name="{{ $expense->name }}">
+                                        آپلود رسید
+                                    </button>
+
+                                    <!-- Delete Form Button -->
+                                    <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="delete-form" data-name="{{ $expense->name }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px; padding: 3px 6px;">
+                                            حذف
+                                        </button>
+                                    </form>
+                                </div>
+
+                            @endif
+                            @if($expense->file_path)
+                                <a href="{{ Storage::url($expense->file_path) }}" class="btn btn-sm btn-info" target="_blank">دانلود</a>
+                            @endif
+
+                        </td>
+
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Modal for file upload -->
