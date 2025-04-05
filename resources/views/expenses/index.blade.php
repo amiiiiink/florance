@@ -27,7 +27,6 @@
                 <th>مبلغ</th>
                 <th>تاریخ</th>
                 <th>وضعیت</th>
-                <th>فیش واریز</th>
                 <th>اقدامات</th>
             </tr>
             </thead>
@@ -53,23 +52,30 @@
                             <span class="badge bg-success">پرداخت شده</span>
                         @endif
                     </td>
-                    <td>
-                        @if($expense->file_path)
-                            <a href="{{ Storage::url($expense->file_path) }}" class="btn btn-sm btn-success" target="_blank">دانلود</a>
-                        @else
-                            <span class="text-muted">ندارد</span>
-                        @endif
-                    </td>
+
                     <td>
                         @if($expense->status == "new")
-                            <!-- Trigger button for the modal -->
-                            <button class="btn btn-warning btn-sm" style="font-size: 12px; padding: 3px 6px;" data-bs-toggle="modal" data-bs-target="#uploadFileModal" data-expense-id="{{ $expense->id }}" data-expense-name="{{ $expense->name }}">آپلود فایل</button>
+                            <div class="d-flex gap-2">
+                                <!-- Upload File Button -->
+                                <button class="btn btn-warning btn-sm" style="font-size: 9px; color: #fff" data-bs-toggle="modal" data-bs-target="#uploadFileModal" data-expense-id="{{ $expense->id }}" data-expense-name="{{ $expense->name }}">
+                                    آپلود رسید
+                                </button>
+
+                                <!-- Delete Form Button -->
+                                <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="delete-form" data-name="{{ $expense->name }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px; padding: 3px 6px;">
+                                        حذف
+                                    </button>
+                                </form>
+                            </div>
+
                         @endif
-                        <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="delete-form" data-name="{{ $expense->name }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px; padding: 3px 6px;">حذف</button>
-                        </form>
+                        @if($expense->file_path)
+                            <a href="{{ Storage::url($expense->file_path) }}" class="btn btn-sm btn-info" target="_blank">دانلود</a>
+                        @endif
+
                     </td>
 
                 </tr>
