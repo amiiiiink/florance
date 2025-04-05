@@ -12,18 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('expenses', function (Blueprint $table) {
-            $table->string('description')->nullable();
-            $table->enum('type', ['cash','check'])->default('cash');
+            $table->string('file_path')->nullable(); // مسیر فایل آپلود شده
+            $table->enum('status', ['new','payed'])->default('new');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('expenses', function (Blueprint $table) {
-            $table->dropColumn(['description', 'type']);
+            $table->dropColumn(['file_path', 'status']);
         });
     }
 

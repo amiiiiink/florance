@@ -97,5 +97,4 @@
             formatNumberInput(document.querySelector('input[name="sale_price"]'));
         });
     </script>
-
 @endsection

@@ -10,7 +10,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::query()->orderBy('date', 'asc')->get();
         return view('expenses.index', compact('expenses'));
     }
 
@@ -26,18 +26,25 @@ class ExpenseController extends Controller
             'date' => $date->format('Y-m-d'),
         ]);
 
+        $request->merge([
+            'amount' => convertPersianToEnglish($request->amount),
+        ]);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required',
             'description' => 'required',
-            'amount' => 'required|numeric',
+            'amount' => 'required|string',
             'date' => 'required|date',
         ]);
+
+        $data = $request->all();
+        $data['amount'] = str_replace(',', '', $data['amount']);
 
 
         Expense::create([
             'name' => $request->name,
-            'amount' => $request->amount,
+            'amount' => $data['amount'],
             'type' => $request->type,
             'description' => $request->description,
             'date' => $request->date,

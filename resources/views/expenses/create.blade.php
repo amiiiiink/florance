@@ -41,7 +41,7 @@
 
             <div class="mb-3">
                 <label class="form-label">مبلغ</label>
-                <input type="number" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}">
+                <input type="text" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}">
                 @error('amount')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -78,6 +78,20 @@
                 calendarType: "persian",
                 observer: true
             });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            function formatNumberInput(input) {
+                input.addEventListener("input", function () {
+                    let value = input.value.replace(/,/g, ''); // حذف کاماهای قبلی
+                    if (!isNaN(value) && value !== "") {
+                        input.value = Number(value).toLocaleString('en-US');
+                    }
+                });
+            }
+
+            formatNumberInput(document.querySelector('input[name="amount"]'));
+            // formatNumberInput(document.querySelector('input[name="sale_price"]'));
         });
     </script>
 @endsection
