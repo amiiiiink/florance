@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -20,15 +21,25 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
+        $date = Verta::parse($request->date)->DateTime();
+        $request->merge([
+            'date' => $date->format('Y-m-d'),
+        ]);
+
         $request->validate([
             'name' => 'required|string|max:255',
+            'type' => 'required',
+            'description' => 'required',
             'amount' => 'required|numeric',
             'date' => 'required|date',
         ]);
 
+
         Expense::create([
             'name' => $request->name,
             'amount' => $request->amount,
+            'type' => $request->type,
+            'description' => $request->description,
             'date' => $request->date,
         ]);
 

@@ -181,11 +181,14 @@ return [
 
     'attributes' => [
         "name" => "نام محصول",
+        "description" => "توضیحات",
+        "type" => "نوع",
         "purchase_price" => "قیمت خرید",
         "sale_price" => "قیمت فروش",
         "purchase_unit" => "واحد خرید",
         "items_per_unit" => "تعداد در هر واحد",
         "stock_quantity" => "تعداد",
+        "amount" => "مبلغ",
 
     ],
 

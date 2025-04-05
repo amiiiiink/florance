@@ -12,9 +12,9 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // نام هزینه
-            $table->integer('amount'); // مبلغ هزینه
-            $table->date('date'); // تاریخ هزینه
+            $table->string('name');
+            $table->integer('amount');
+            $table->date('date');
             $table->timestamps();
         });
     }

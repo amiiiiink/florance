@@ -6,7 +6,8 @@ docker run --name mysql-florance -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABA
 
 todo :  
 
-1. make dashboard persian
+1. add sarresid bedehi ha
 2. edit products page
 3. test upload purchase invoices
-4. add sarresid bedehi ha
+4. visitors lists
+

@@ -40,7 +40,10 @@
                     <a class="nav-link" href="{{ route('sales.create') }}">ثبت فروش</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('expenses.create') }}">هزینه ها</a>
+                    <a class="nav-link" href="{{ route('expenses.index') }}">سر رسید بدهی ها</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ویزیتور ها</a>
                 </li>
             </ul>
         </div>

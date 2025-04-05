@@ -10,15 +10,38 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label">نام هزینه</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" >
                 @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">نوع بدهی</label>
+                <select name="type" class="form-control @error('type') is-invalid @enderror">
+                    <option value="" disabled {{ old('type') ? '' : 'selected' }}>...</option>
+                    <option value="cash" {{ old('type') == 'cash' ? 'selected' : '' }}>نقدی</option>
+                    <option value="check" {{ old('type') == 'check' ? 'selected' : '' }}>چکی</option>
+
+                </select>
+
+                @error('type')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="mb-3">
+                <label for="description" class="form-label">توضیحات</label>
+                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+
+                @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">مبلغ</label>
-                <input type="number" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" required>
+                <input type="number" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}">
                 @error('amount')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

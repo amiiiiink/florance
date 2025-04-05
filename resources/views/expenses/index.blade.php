@@ -15,7 +15,10 @@
         <table class="table table-bordered">
             <thead>
             <tr>
+                <th>ردیف</th>
                 <th>نام هزینه</th>
+                <th>نوع بدهی</th>
+                <th>توضیحات</th>
                 <th>مبلغ</th>
                 <th>تاریخ</th>
                 <th>اقدامات</th>
@@ -24,11 +27,20 @@
             <tbody>
             @foreach($expenses as $expense)
                 <tr>
+                    <td>{{ toPersianNumbers($loop->iteration) }}</td>
                     <td>{{ $expense->name }}</td>
-                    <td>{{ number_format($expense->amount) }} تومان</td>
-                    <td>{{ $expense->date }}</td>
                     <td>
-                        <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" style="display:inline;">
+                        @if($expense->type == "cash")
+                            {{ 'نقدی' }}
+                        @elseif($expense->type == "check")
+                            {{ 'چک' }}
+                        @endif</td>
+                    <td>{{ $expense->description }}</td>
+                    <td>{{ toPersianNumbers(number_format($expense->amount)) }} تومان</td>
+                    <td>{{ toPersianNumbers(\Verta::instance($expense->date)->format('Y/m/d')) }}</td>
+                    <td>
+                        <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST"
+                              style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">حذف</button>
