@@ -44,7 +44,7 @@
                     <a class="nav-link" href="{{ route('expenses.index') }}">سر رسید بدهی ها</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ویزیتور ها</a>
+                    <a class="nav-link" href="{{ route('visitors.index') }}">ویزیتور ها</a>
                 </li>
             </ul>
         </div>
