@@ -44,7 +44,15 @@
                                 {{ 'چک' }}
                             @endif
                         </td>
-                        <td>{{ $expense->description }}</td>
+                        <td>
+                            <span
+                                class="show-full-text"
+                                data-full-text="{{ $expense->description }}"
+                                style="cursor: pointer; color: blue; text-decoration: underline;"
+                            >
+                                {{ Str::limit($expense->description, 30) }}
+                            </span>
+                        </td>
                         <td>{{ toPersianNumbers(number_format($expense->amount)) }} تومان</td>
                         <td>{{ toPersianNumbers(\Verta::instance($expense->date)->format('Y/m/d')) }}</td>
                         <td>
@@ -129,6 +137,7 @@
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         document.querySelectorAll('.delete-form').forEach(form => {
             form.addEventListener('submit', function(e) {
@@ -164,5 +173,22 @@
             var expenseInput = uploadFileModal.querySelector('#expense_id');
             expenseInput.value = expenseId;
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.show-full-text').forEach(function (element) {
+                element.addEventListener('click', function () {
+                    const fullText = this.dataset.fullText;
+
+                    Swal.fire({
+                        title: 'توضیحات',
+                        text: fullText,
+                        icon: 'info',
+                        confirmButtonText: 'بستن'
+                    });
+                });
+            });
+        });
+
+
     </script>
 @endsection

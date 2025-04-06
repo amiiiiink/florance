@@ -10,5 +10,4 @@ todo :
 1. test upload purchase invoices
 2. visitors lists
 3. edit products page
-4. make description of expenses on pop up and better on mobile
 
