@@ -50,7 +50,7 @@
                                 data-full-text="{{ $expense->description }}"
                                 style="cursor: pointer; color: blue; text-decoration: underline;"
                             >
-                                {{ Str::limit($expense->description, 30) }}
+                                {{ Str::limit($expense->description, 14) }}
                             </span>
                         </td>
                         <td>{{ toPersianNumbers(number_format($expense->amount)) }} تومان</td>
