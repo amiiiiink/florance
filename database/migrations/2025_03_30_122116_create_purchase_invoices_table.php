@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('purchase_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // عنوان فاکتور
-            $table->string('file_path')->nullable(); // مسیر فایل آپلود شده
-            $table->enum('status', ['new', 'submitted'])->default('new'); // وضعیت فاکتور
+            $table->string('title');
+            $table->string('file_path')->nullable();
+            $table->enum('status', ['new', 'submitted'])->default('new');
             $table->timestamps();
         });
     }

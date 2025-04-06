@@ -23,22 +23,20 @@ class PurchaseInvoiceController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'status' => 'required|in:new,submitted',
             'description' => 'nullable|string'
         ]);
 
         $filePath = null;
         if ($request->hasFile('file')) {
-//            $filePath = $request->file('file')->store('purchase_invoices');
             $filePath = $request->file('file')->store('purchase_invoices', 'public');
-
         }
+
+
 
         PurchaseInvoice::create([
             'title' => $request->title,
             'file_path' => $filePath,
             'description' => $request->description,
-            'status' => $request->status,
         ]);
 
         return redirect()->route('purchase_invoices.index')->with('success', 'فاکتور با موفقیت ثبت شد.');

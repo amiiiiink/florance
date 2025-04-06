@@ -9,6 +9,6 @@ class PurchaseInvoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'file', 'status', 'description'];
+    protected $fillable = ['title', 'file_path', 'status', 'description'];
 
 }
