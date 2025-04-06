@@ -7,7 +7,6 @@ docker run --name mysql-florance -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABA
 todo :  
 
 
-1. test upload purchase invoices
-2. visitors lists
-3. edit products page
+1. visitors lists
+2. edit products page
 
